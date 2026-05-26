@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1100" width="100%" height="100%">
+    <style>
+        rect, polygon, path, line { fill: none; stroke: black; stroke-width: 1.5; }
+        text { font-family: Arial, sans-serif; font-size: 19px; fill: black; stroke: none; }
+        .bg { fill: white; stroke: none; }
+        .center-text { text-anchor: middle; dominant-baseline: central; }
+    </style>
+    <rect class="bg" width="100%" height="100%"/>
+
+    <defs>
+        <!-- Маркер стрелки, refX=10 гарантирует, что острие будет ровно на координате конца линии -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0,0 L 10,5 L 0,10 Z" style="fill: black; stroke: none;" />
+        </marker>
+
+        <!-- Шаблоны фигур -->
+        <rect id="term" x="-120" y="-30" width="240" height="60" rx="30" ry="30" />
+        <rect id="rect" x="-120" y="-60" width="240" height="120" />
+        <g id="proc">
+            <rect x="-120" y="-60" width="240" height="120" />
+            <line x1="-105" x2="-105" y1="-60" y2="60" />
+            <line x1="105" x2="105" y1="-60" y2="60" />
+        </g>
+        <polygon id="rhomb" points="0,-60 120,0 0,60 -120,0" />
+    </defs>
+
+    <!-- ЛИНИИ И СТРЕЛКИ -->
+    <g id="arrows">
+        <!-- От Начала к Вводу (Term bottom: 110, Rect top: 140) -->
+        <line x1="350" y1="110" x2="350" y2="140" marker-end="url(#arrow)" />
+
+        <!-- От Ввода к точке слияния перед циклом (Rect bottom: 260) -->
+        <line x1="350" y1="260" x2="350" y2="280" />
+        <!-- От точки слияния в условие цикла (Rhombus top: 300) -->
+        <line x1="350" y1="280" x2="350" y2="300" marker-end="url(#arrow)" />
+
+        <!-- Условие цикла (ДА) -> Проверка ID (Rhombus 1 bottom: 420, Rhombus 2 top: 450) -->
+        <line x1="350" y1="420" x2="350" y2="450" marker-end="url(#arrow)" />
+
+        <!-- Проверка ID (НЕТ) -> Переход к след. (Rhombus 2 bottom: 570, Proc 1 top: 620) -->
+        <line x1="350" y1="570" x2="350" y2="620" marker-end="url(#arrow)" />
+
+        <!-- Возврат цикла (Loopback) - Вынесен на внешний левый радиус -->
+        <path d="M 350,740 L 350,790 L 80,790 L 80,280 L 350,280" />
+
+        <!-- Условие цикла (НЕТ) -> Создание узла (Proc 2 top: 620) -->
+        <path d="M 470,360 L 650,360" />
+        <line x1="650" y1="360" x2="650" y2="620" marker-end="url(#arrow)" />
+
+        <!-- Проверка ID (ДА / Дубликат) -> Сборная линия выхода - Внутренний радиус -->
+        <path d="M 230,510 L 180,510 L 180,860 L 350,860" />
+
+        <!-- Создание узла -> Сборная линия выхода -->
+        <path d="M 650,740 L 650,860 L 350,860" />
+
+        <!-- От сборной линии выхода -> в Конец (Term bottom top: 920) -->
+        <line x1="350" y1="860" x2="350" y2="920" marker-end="url(#arrow)" />
+    </g>
+
+    <!-- ПОДПИСИ ВЕТВЛЕНИЙ -->
+    <text x="370" y="435" class="center-text">Да</text>
+    <text x="495" y="345" class="center-text">Нет</text>
+
+    <text x="370" y="595" class="center-text">Нет</text>
+    <text x="205" y="495" class="center-text">Да</text>
+
+    <!-- БЛОКИ -->
+
+    <!-- 1. Начало -->
+    <g transform="translate(350, 80)">
+        <use href="#term" />
+        <text class="center-text">Начало</text>
+    </g>
+
+    <!-- 2. Входные параметры и комментарий -->
+    <g transform="translate(350, 200)">
+        <use href="#rect" />
+        <text x="0" y="0" class="center-text">Вх.: current, x</text>
+
+        <!-- Блок комментария (высота скобки увеличена под размер блока) -->
+        <line x1="120" y1="0" x2="160" y2="0" stroke-dasharray="6,4" />
+        <path d="M 170,-60 L 160,-60 L 160,60 L 170,60" />
+        <g style="text-anchor: start;">
+            <text x="180" y="-20">current (TreeNode**) - адрес адреса узла</text>
+            <text x="180" y="20">x (Product) - структура нового товара</text>
+        </g>
+    </g>
+
+    <!-- 3. Условие цикла -->
+    <g transform="translate(350, 360)">
+        <use href="#rhomb" />
+        <text y="-10" class="center-text">*current</text>
+        <text y="15" class="center-text">не равно NULL</text>
+    </g>
+
+    <!-- 4. Проверка на дубликат (Шрифт уменьшен) -->
+    <g transform="translate(350, 510)">
+        <use href="#rhomb" />
+        <text y="-10" class="center-text" style="font-size: 17px;">x.id равно</text>
+        <text y="15" class="center-text" style="font-size: 17px;">(*current)-&gt;item.id</text>
+    </g>
+
+    <!-- 5. Шаг цикла (tree_get_next) -->
+    <g transform="translate(350, 680)">
+        <use href="#proc" />
+        <text y="-20" class="center-text">ф. tree_get_next()</text>
+        <text y="5" class="center-text">Переход к следующей</text>
+        <text y="25" class="center-text">вершине</text>
+    </g>
+
+    <!-- 6. Создание нового узла (выполняется если *current == NULL) -->
+    <g transform="translate(650, 680)">
+        <use href="#proc" />
+        <text y="-20" class="center-text">ф. tree_create_node()</text>
+        <text y="5" class="center-text">Выделение памяти</text>
+        <text y="25" class="center-text">под новую вершину</text>
+    </g>
+
+    <!-- 7. Конец -->
+    <g transform="translate(350, 950)">
+        <use href="#term" />
+        <text class="center-text">Конец</text>
+    </g>
+
+</svg>

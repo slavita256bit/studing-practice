@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 1150 1520" width="100%" height="100%">
+    <style>
+        rect, polygon, path, line { fill: none; stroke: black; stroke-width: 1.5; }
+        text { font-family: Arial, sans-serif; font-size: 19px; fill: black; stroke: none; }
+        .bg { fill: white; stroke: none; }
+        .center-text { text-anchor: middle; dominant-baseline: central; }
+    </style>
+    <rect class="bg" width="100%" height="100%"/>
+
+    <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0,0 L 10,5 L 0,10 Z" style="fill: black; stroke: none;" />
+        </marker>
+
+        <rect id="term" x="-120" y="-30" width="240" height="60" rx="30" ry="30" />
+        <rect id="rect" x="-120" y="-60" width="240" height="120" />
+        <g id="proc">
+            <rect x="-120" y="-60" width="240" height="120" />
+            <line x1="-105" x2="-105" y1="-60" y2="60" />
+            <line x1="105" x2="105" y1="-60" y2="60" />
+        </g>
+        <polygon id="rhomb" points="0,-60 120,0 0,60 -120,0" />
+    </defs>
+
+    <g id="arrows">
+        <line x1="250" y1="110" x2="250" y2="160" marker-end="url(#arrow)" />
+        <line x1="250" y1="280" x2="250" y2="310" />
+        <line x1="250" y1="310" x2="250" y2="340" marker-end="url(#arrow)" />
+        <line x1="250" y1="460" x2="250" y2="520" marker-end="url(#arrow)" />
+        <line x1="250" y1="640" x2="250" y2="1330" marker-end="url(#arrow)" />
+
+        <!-- CASE 'a' -->
+        <path d="M 250,710 L 430,710" marker-end="url(#arrow)" />
+        <line x1="670" y1="710" x2="730" y2="710" marker-end="url(#arrow)" />
+        <line x1="970" y1="710" x2="1000" y2="710" marker-end="url(#arrow)" />
+
+        <!-- CASE 'c' -->
+        <path d="M 250,850 L 430,850" marker-end="url(#arrow)" />
+        <line x1="670" y1="850" x2="730" y2="850" marker-end="url(#arrow)" />
+        <line x1="970" y1="850" x2="1000" y2="850" marker-end="url(#arrow)" />
+
+        <!-- CASE 'i' -->
+        <path d="M 250,990 L 430,990" marker-end="url(#arrow)" />
+        <line x1="670" y1="990" x2="1000" y2="990" marker-end="url(#arrow)" />
+
+        <!-- CASE 'l' -->
+        <path d="M 250,1130 L 430,1130" marker-end="url(#arrow)" />
+        <line x1="670" y1="1130" x2="1000" y2="1130" marker-end="url(#arrow)" />
+
+        <!-- CASE 'e' -->
+        <path d="M 250,1270 L 430,1270" marker-end="url(#arrow)" />
+        <line x1="670" y1="1270" x2="1000" y2="1270" marker-end="url(#arrow)" />
+
+        <line x1="1000" y1="1270" x2="1000" y2="310" />
+        <line x1="1000" y1="310" x2="250" y2="310" marker-end="url(#arrow)" />
+
+        <line x1="250" y1="1450" x2="250" y2="1490" marker-end="url(#arrow)" />
+    </g>
+
+    <text x="330" y="695" class="center-text">'a'</text>
+    <text x="330" y="835" class="center-text">'c'</text>
+    <text x="330" y="975" class="center-text">'i'</text>
+    <text x="330" y="1115" class="center-text">'l'</text>
+    <text x="330" y="1255" class="center-text">'e'</text>
+    <text x="270" y="1300" class="center-text">'x'</text>
+
+    <!-- Start -->
+    <g transform="translate(250, 80)">
+        <use href="#term" />
+        <text x="0" y="0" class="center-text">Начало</text>
+    </g>
+
+    <!-- Variables -->
+    <g transform="translate(250, 220)">
+        <use href="#rect" />
+        <text x="0" y="-25" class="center-text">Вх.: state,</text>
+        <text x="0" y="0" class="center-text">products_filename[]</text>
+        <text x="0" y="30" class="center-text">Пр.: *products</text>
+
+        <!-- Блок комментария (высота скобки увеличена под размер блока) -->
+        <line x1="120" y1="0" x2="160" y2="0" stroke-dasharray="6,4" />
+        <path d="M 170,-60 L 160,-60 L 160,60 L 170,60" />
+        <g style="text-anchor: start;">
+            <text x="180" y="-25">state - состояние меню, символ</text>
+            <text x="180" y="0">products_filename[FILENAME_MAX] - имя файла с товарами, статическая строка</text>
+            <text x="180" y="25">*products - адрес корня дерева товаров, тип TreeNode**</text>
+        </g>
+    </g>
+
+
+    <!-- Ask Action -->
+    <g transform="translate(250, 400)">
+        <use href="#proc" />
+        <text x="0" y="-20" class="center-text">ф. ask_action()</text>
+        <text x="0" y="5" class="center-text">Запрос действия и</text>
+        <text x="0" y="25" class="center-text">запись в state</text>
+        <line x1="120" y1="0" x2="160" y2="0" stroke-dasharray="6,4" />
+        <path d="M 170,-70 L 160,-70 L 160,70 L 170,70" />
+        <g style="text-anchor: start;">
+            <text x="170" y="-50">'a' - добавить товар</text>
+            <text x="170" y="-30">'c' - добавить категорию</text>
+            <text x="170" y="-10">'i' - импорт базы</text>
+            <text x="170" y="10">'l' - каталог товаров</text>
+            <text x="170" y="30">'e' - экспорт каталога</text>
+            <text x="170" y="50">'x' - выход</text>
+        </g>
+    </g>
+
+    <!-- Switch -->
+    <g transform="translate(250, 580)">
+        <use href="#rhomb" />
+        <text x="0" y="0" class="center-text">state равно</text>
+    </g>
+
+    <!-- Case 'a' -->
+    <g transform="translate(550, 710)">
+        <use href="#proc" />
+        <text x="0" y="-15" class="center-text">ф. read_new_product()</text>
+        <text x="0" y="15" class="center-text">Ввод характеристик</text>
+    </g>
+    <g transform="translate(850, 710)">
+        <use href="#proc" />
+        <text x="0" y="-15" class="center-text">ф. tree_add_element()</text>
+        <text x="0" y="15" class="center-text">Вставка в дерево</text>
+    </g>
+
+    <!-- Case 'c' -->
+    <g transform="translate(550, 850)">
+        <use href="#proc" />
+        <text x="0" y="-15" class="center-text">ф. read_new_category()</text>
+        <text x="0" y="15" class="center-text">Ввод новой категории</text>
+    </g>
+    <g transform="translate(850, 850)">
+        <use href="#proc" />
+        <text x="0" y="-15" class="center-text">ф. add_category()</text>
+        <text x="0" y="15" class="center-text">Запись в файл</text>
+        <text x="0" y="40" class="center-text">категорий</text>
+    </g>
+
+    <!-- Case 'i' -->
+    <g transform="translate(550, 990)">
+        <use href="#proc" />
+        <text x="0" y="-20" class="center-text">ф. import_products()</text>
+        <text x="0" y="5" class="center-text">Загрузка базы</text>
+        <text x="0" y="25" class="center-text">из файла</text>
+    </g>
+
+    <!-- Case 'l' -->
+    <g transform="translate(550, 1130)">
+        <use href="#proc" />
+        <text x="0" y="-20" class="center-text">ф. tree_card_print()</text>
+        <text x="0" y="5" class="center-text">Вывод списка</text>
+        <text x="0" y="25" class="center-text">товаров</text>
+    </g>
+
+    <!-- Case 'e' -->
+    <g transform="translate(550, 1270)">
+        <use href="#proc" />
+        <text x="0" y="-20" class="center-text">ф. export_products()</text>
+        <text x="0" y="5" class="center-text">Сохранение базы</text>
+        <text x="0" y="25" class="center-text">в файл</text>
+    </g>
+
+    <!-- Cleanup -->
+    <g transform="translate(250, 1390)">
+        <use href="#proc" />
+        <text x="0" y="-10" class="center-text">ф. tree_clear()</text>
+        <text x="0" y="15" class="center-text">Освобождение памяти</text>
+    </g>
+
+    <!-- End -->
+    <g transform="translate(250, 1520)">
+        <use href="#term" />
+        <text x="0" y="0" class="center-text">Конец</text>
+    </g>
+
+</svg>

@@ -310,3 +310,172 @@
 [4] Справочник по языку C [Электронный ресурс]. – Режим доступа: https://ru.cppreference.com/w/c. – Дата доступа: 15.05.2024.
 
 [5] Документация Microsoft C/C++ и языка C [Электронный ресурс] / Microsoft Learn. – Режим доступа: https://learn.microsoft.com/ru-ru/cpp/c-language/. – Дата доступа: 16.05.2024.
+
+
+#show: appendixes
+
+#let appendix-heading(status, level: 1, body) = {
+  heading(level: level)[(#status)\ #v(1em) #body]
+}
+
+#let get-numbering-alphabet(number) = {
+  // excluded "З"
+  let alphabet = ("а", "б", "в", "г", "д", "е", "ж", "и", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "э", "ю", "я",)
+  let result = ""
+
+  while number > 0 {
+    result = alphabet.at(calc.rem(number - 1, 28)) + result
+    number = calc.floor(number / 28)
+  }
+
+  return result
+}
+
+#let heading-numbering(..nums) = {
+  nums = nums.pos()
+  let letter = upper(get-numbering-alphabet(nums.first()))
+  let rest = nums.slice(1).map(elem => str(elem))
+  if rest != none {
+    return (letter, rest).flatten().join(".")
+  }
+  return letter
+}
+
+#set heading(numbering: heading-numbering, hanging-indent: 0pt)
+
+#appendix-heading("Обязательное")[Схема алгоритма функции `main`] <main-scheme>
+
+#eskd-scheme(
+  title: "Схема алгоритима функции\nmain",
+  doc-code: "ГУИР.6-05-0611-05.114 ПД1",
+  dev-name: "Ермаков",
+  prov-name: "Ковальчук",
+  group-name: "ЭВМ, гр. 558301",
+  paper-format: "a4",
+  vertical: true
+)[
+    #move(dy: -1em, dx: 2em, align(center + horizon)[
+      #image("scheme1.svg", height: 100%, fit: "contain")
+    ])
+]
+
+#appendix-heading("Обязательное")[Схема алгоритма функции `tree_add_element`] <tree_add_element-scheme>
+
+#eskd-scheme(
+  title: "Схема алгоритима функции\ntree_add_element",
+  doc-code: "ГУИР.6-05-0611-05.114 ПД2",
+  dev-name: "Ермаков",
+  prov-name: "Ковальчук",
+  group-name: "ЭВМ, гр. 558301",
+  paper-format: "a4",
+  vertical: true
+)[
+  #block(width: 110%, height: 100%)[
+    #align(center + horizon)[
+      #image("scheme2.svg", height: 80%, fit: "contain")
+    ]
+  ]
+]
+
+#appendix-heading("Обязательное")[Код программы] <code-appendix>
+
+
+#show raw.where(block: true): it => block(
+  width: 100%,
+  breakable: true,
+  text(
+    font: "Consolas",
+    size: 12pt,
+    it
+  )
+)
+
+// 1. Создаем список с путями к вашим файлам
+#let files = (
+  "marketplace_in_c/main.c",
+
+  "marketplace_in_c/product.h",
+  "marketplace_in_c/categories.h",
+  "marketplace_in_c/tree.h",
+  "marketplace_in_c/interaction.h",
+  "marketplace_in_c/io.h",
+  "marketplace_in_c/settings.h",
+
+  "marketplace_in_c/product.c",
+  "marketplace_in_c/categories.c",
+  "marketplace_in_c/tree.c",
+  "marketplace_in_c/interaction.c",
+  "marketplace_in_c/io.c",
+)
+
+#let clean-code(content) = {
+  content.replace(regex(" {2,}//"), " //")
+//   let processed = content.replace("    ", "  ")
+//   processed.replace(regex("\u{A0}"), " ").replace(regex(" {2,}//"), " //")
+}
+
+#set par(leading: 0.5em)
+#for file in files [
+  #let filename = file.split("/").last()
+
+  #align(center)[*Код файла #filename*]
+
+  #raw(clean-code(read(file)), lang: "c", block: true)
+]
+
+#appendix-heading("Обязательное")[Ведомость документов] <vedomost>
+
+#[
+  #show: eskd-vedomost.with(
+    title: "Ведомость документов",
+    doc-code: "ГУИР.6-05-0611-05.141 Д1",
+    dev-name: "Ермаков",
+    prov-name: "Ковальчук",
+    group-name: "ЭВМ, гр. 558301"
+  )
+  #set text(font: "GOST Type B")
+
+  #set text(style: "normal")
+  #let er = ([], [], []) // Пустая строка для отступов
+
+  #place(top + left, dx: -5mm, dy: -20mm, block(
+    width: 185mm,
+    height: 242mm,
+    table(
+      columns: (60mm, 95mm, 30mm),
+      rows: (10mm, ..(8mm,) * 29), // 30 строк, ровно 242мм высоты до штампа
+      inset: (x: 2mm, y: 0pt),
+      stroke: 0.5mm + black, // Толщина совпадает с толщиной рамки ГОСТ
+      align: (x, y) => if y == 0 or x == 2 { center + horizon } else { left + horizon },
+
+      // Строка 1
+      table.cell(align: center)[Обозначение], table.cell(align: center)[Наименование], table.cell(align: center)[Примечание],
+      ..er, // 2
+      [], table.cell(align: center)[#underline[Графические документы]], [], // 3
+      ..er, // 4
+
+      // Строки 5-6
+      [ГУИР.6-05-0611-05.141 ПД1], [Схема алгоритма функции main], [А4],
+      ..er, // 7
+
+      // Строки 8-10
+      [ГУИР.6-05-0611-05.141 ПД2], [Схема алгоритма функции tree_add_element], [А4],
+
+       // 11
+      ..er, // 12
+
+      // Строки 13-14
+      [], table.cell(align: center)[#underline[Текстовые документы]], [],
+      ..er,
+
+      // Строки 15-17
+      [БГУИР.6-05-0611-05.141 ПЗ], [Отчет по учебной (ознакомительной) практике], [#context [ #counter(page).final().first() с. ]],
+      [], [], [],
+      [], [], [],
+
+      // Добиваем пустые строки до 30 (использовано 17 строк, нужно еще 13)
+      ..er, ..er, ..er, ..er, ..er, ..er, ..er,
+      ..er, ..er, ..er, ..er, ..er, ..er
+       )
+  ))
+]
