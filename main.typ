@@ -185,14 +185,14 @@
 
 #figure(
   table(
-    columns: 4,
+    columns: (auto, auto, 7em, 12em),
     align: center + horizon,
     // УРОВЕНЬ 1: Category
     table.cell(colspan: 4)[*struct Category*],
     // УРОВЕНЬ 2: Поля Category
     [`char name[30]` \ Название],
     [`int fields_count` \ Кол-во полей],
-    [`Type field_types[6]` \ Типы полей],
+    [`Type`\ `field_types[6]` \ Типы полей],
     [`char field_names[6][30]` \ Имена полей]
   ),
   caption: [Структура данных категории]
@@ -202,7 +202,7 @@
 
 #figure(
   table(
-    columns: 3,
+    columns: (1fr, 1fr, 1fr),
     align: center + horizon,
     // УРОВЕНЬ 1: Enum Type
     table.cell(colspan: 3)[*enum Type*],
