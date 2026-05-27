@@ -81,8 +81,8 @@
         <line x1="120" y1="0" x2="160" y2="0" stroke-dasharray="6,4" />
         <path d="M 170,-60 L 160,-60 L 160,60 L 170,60" />
         <g style="text-anchor: start;">
-            <text x="180" y="-20">current (TreeNode**) - адрес адреса узла</text>
-            <text x="180" y="20">x (Product) - структура нового товара</text>
+            <text x="180" y="-15">current - адрес адреса узла, тип TreeNode**</text>
+            <text x="180" y="15">x - структура нового товара, тип Product</text>
         </g>
     </g>
 
