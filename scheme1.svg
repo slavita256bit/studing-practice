@@ -117,11 +117,13 @@
         <use href="#proc" />
         <text x="0" y="-15" class="center-text">ф. read_new_product()</text>
         <text x="0" y="15" class="center-text">Ввод характеристик</text>
+        <text x="0" y="40" class="center-text">с клавиатуры</text>
     </g>
     <g transform="translate(850, 710)">
         <use href="#proc" />
         <text x="0" y="-15" class="center-text">ф. tree_add_element()</text>
-        <text x="0" y="15" class="center-text">Вставка в дерево</text>
+        <text x="0" y="15" class="center-text">Добавление товара</text>
+        <text x="0" y="40" class="center-text">в дерево</text>
     </g>
 
     <!-- Case 'c' -->
@@ -129,11 +131,12 @@
         <use href="#proc" />
         <text x="0" y="-15" class="center-text">ф. read_new_category()</text>
         <text x="0" y="15" class="center-text">Ввод новой категории</text>
+        <text x="0" y="40" class="center-text">с клавиатуры</text>
     </g>
     <g transform="translate(850, 850)">
         <use href="#proc" />
         <text x="0" y="-15" class="center-text">ф. add_category()</text>
-        <text x="0" y="15" class="center-text">Запись в файл</text>
+        <text x="0" y="15" class="center-text">Запись в бин. файл</text>
         <text x="0" y="40" class="center-text">категорий</text>
     </g>
 
@@ -141,8 +144,8 @@
     <g transform="translate(550, 990)">
         <use href="#proc" />
         <text x="0" y="-20" class="center-text">ф. import_products()</text>
-        <text x="0" y="5" class="center-text">Загрузка базы</text>
-        <text x="0" y="25" class="center-text">из файла</text>
+        <text x="0" y="5" class="center-text">Загрузка товаров</text>
+        <text x="0" y="25" class="center-text">из бин. файла</text>
     </g>
 
     <!-- Case 'l' -->
@@ -150,22 +153,23 @@
         <use href="#proc" />
         <text x="0" y="-20" class="center-text">ф. tree_card_print()</text>
         <text x="0" y="5" class="center-text">Вывод списка</text>
-        <text x="0" y="25" class="center-text">товаров</text>
+        <text x="0" y="25" class="center-text">товаров на экран</text>
     </g>
 
     <!-- Case 'e' -->
     <g transform="translate(550, 1270)">
         <use href="#proc" />
         <text x="0" y="-20" class="center-text">ф. export_products()</text>
-        <text x="0" y="5" class="center-text">Сохранение базы</text>
-        <text x="0" y="25" class="center-text">в файл</text>
+        <text x="0" y="5" class="center-text">Сохранение товаров</text>
+        <text x="0" y="25" class="center-text">в бин. файл</text>
     </g>
 
     <!-- Cleanup -->
     <g transform="translate(250, 1390)">
         <use href="#proc" />
         <text x="0" y="-10" class="center-text">ф. tree_clear()</text>
-        <text x="0" y="15" class="center-text">Освобождение памяти</text>
+        <text x="0" y="15" class="center-text">Освобождение памяти,</text>
+        <text x="0" y="40" class="center-text">выд. под узлы дерева</text>
     </g>
 
     <!-- End -->
