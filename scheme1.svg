@@ -99,7 +99,7 @@
         <g style="text-anchor: start;">
             <text x="170" y="-50">'a' - добавить товар</text>
             <text x="170" y="-30">'c' - добавить категорию</text>
-            <text x="170" y="-10">'i' - импорт базы</text>
+            <text x="170" y="-10">'i' - импорт товаров</text>
             <text x="170" y="10">'l' - каталог товаров</text>
             <text x="170" y="30">'e' - экспорт каталога</text>
             <text x="170" y="50">'x' - выход</text>
@@ -116,7 +116,7 @@
     <g transform="translate(550, 710)">
         <use href="#proc" />
         <text x="0" y="-15" class="center-text">ф. read_new_product()</text>
-        <text x="0" y="15" class="center-text">Ввод характеристик</text>
+        <text x="0" y="15" class="center-text">Ввод товара</text>
         <text x="0" y="40" class="center-text">с клавиатуры</text>
     </g>
     <g transform="translate(850, 710)">
